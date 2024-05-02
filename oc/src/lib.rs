@@ -22,10 +22,10 @@ impl ObjCClass {
 macro_rules! objc_bind_class {
     ($objc_class_name:ident) => {
         #[repr(C)]
-        pub struct $objc_class_name($crate::objc_runtime::ObjCObject);
+        pub struct $objc_class_name($crate::ObjCObject);
         impl $objc_class_name {
             #[inline(always)]
-            pub fn class() -> $crate::objc_runtime::ObjCClass {
+            pub fn class() -> $crate::ObjCClass {
                 extern "C" {
                     #[link_name = concat!("OBJC_CLASS_$_", stringify!($objc_class_name))]
                     static OBJC_CLASS: [u8; 0];

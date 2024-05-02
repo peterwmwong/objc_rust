@@ -1,0 +1,10 @@
+[package]
+name = "app"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+test_objc_provider = { path = "../test_objc_provider" }
+
+[build-dependencies]
+cc = "1.0"

@@ -8,8 +8,8 @@
             "type": "process",
             "command": "${workspaceFolder}/scripts/asm-gen-full.sh",
             "args": [
-                "target/aarch64-apple-darwin/release/objc_rust",
-                "OBJC_RUST_AFTER"
+                "target/aarch64-apple-darwin/release/app",
+                "APP_AFTER"
             ],
             "problemMatcher": [],
             "dependsOn": [
@@ -21,8 +21,8 @@
             "type": "process",
             "command": "${workspaceFolder}/scripts/asm-gen-full.sh",
             "args": [
-                "target/aarch64-apple-darwin/release/objc_rust",
-                "OBJC_RUST_BEFORE"
+                "target/aarch64-apple-darwin/release/app",
+                "APP_BEFORE"
             ],
             "problemMatcher": [],
             "dependsOn": [
@@ -33,13 +33,13 @@
             "label": "asm diff",
             "type": "shell",
             "problemMatcher": [],
-            "command": "/usr/local/bin/code-insiders -r --diff /tmp/asm-gen-full-OBJC_RUST_BEFORE.s /tmp/asm-gen-full-OBJC_RUST_AFTER.s"
+            "command": "/usr/local/bin/code-insiders -r --diff /tmp/asm-gen-full-APP_BEFORE.s /tmp/asm-gen-full-APP_AFTER.s"
         },
         {
             "label": "build release",
             "type": "shell",
             "problemMatcher": [],
-            "command": "cargo build --target aarch64-apple-darwin --profile=release -Z build-std=std,panic_abort -Z build-std-features=panic_immediate_abort"
+            "command": "cargo build --package app --target aarch64-apple-darwin --profile=release -Z build-std=std,panic_abort -Z build-std-features=panic_immediate_abort"
         }
     ]
 }

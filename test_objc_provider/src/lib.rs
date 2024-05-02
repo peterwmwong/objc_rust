@@ -1,4 +1,4 @@
-mod objc_runtime;
+use oc::{msg_send, objc_bind_class};
 
 objc_bind_class!(TestObject);
 impl TestObject {
