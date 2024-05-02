@@ -1,0 +1,9 @@
+[target.aarch64-apple-darwin]
+linker = "/Applications/Xcode-beta.app/Contents/Developer/usr/bin/ld"
+
+[build]
+rustflags = ["-Z", "threads=16", "-C", "link-args=-no_exported_symbols", "-C", "target-cpu=native"]
+target = "aarch64-apple-darwin"
+
+[env]
+MACOSX_DEPLOYMENT_TARGET = "14.5"

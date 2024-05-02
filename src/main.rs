@@ -1,19 +1,10 @@
-#[macro_use]
-extern crate objc;
+#![cfg_attr(not(test), no_main)]
+use objc_rust::TestObject;
 
-use objc::runtime::*;
-
-#[link(name = "sample")]
-extern {
-    #[link_name = "OBJC_CLASS_$_Sample"]
-    static SAMPLE_C: Class;
-}
-
-fn main() {
-    unsafe {
-        let sample: *mut Object = msg_send![&SAMPLE_C, new];
-        let _: () = msg_send![sample, sayHello];
-        let _: () = msg_send![sample, release];
-    }
-    println!("Hello rust!");
+#[cfg_attr(not(test), no_mangle)]
+pub fn main(_argc: i32, _argv: *const *const u8) -> isize {
+    let o = TestObject::new();
+    let code = o.get_value(100);
+    o.release();
+    code as _
 }

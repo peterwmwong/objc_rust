@@ -1,0 +1,45 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "asm after",
+            "type": "process",
+            "command": "${workspaceFolder}/scripts/asm-gen-full.sh",
+            "args": [
+                "target/aarch64-apple-darwin/release/objc_rust",
+                "OBJC_RUST_AFTER"
+            ],
+            "problemMatcher": [],
+            "dependsOn": [
+                "build release"
+            ]
+        },
+        {
+            "label": "asm before",
+            "type": "process",
+            "command": "${workspaceFolder}/scripts/asm-gen-full.sh",
+            "args": [
+                "target/aarch64-apple-darwin/release/objc_rust",
+                "OBJC_RUST_BEFORE"
+            ],
+            "problemMatcher": [],
+            "dependsOn": [
+                "build release"
+            ]
+        },
+        {
+            "label": "asm diff",
+            "type": "shell",
+            "problemMatcher": [],
+            "command": "/usr/local/bin/code-insiders -r --diff /tmp/asm-gen-full-OBJC_RUST_BEFORE.s /tmp/asm-gen-full-OBJC_RUST_AFTER.s"
+        },
+        {
+            "label": "build release",
+            "type": "shell",
+            "problemMatcher": [],
+            "command": "cargo build --target aarch64-apple-darwin --profile=release -Z build-std=std,panic_abort -Z build-std-features=panic_immediate_abort"
+        }
+    ]
+}
